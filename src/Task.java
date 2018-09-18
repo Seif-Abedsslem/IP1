@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Task {
 
    String title;
@@ -9,6 +12,15 @@ public class Task {
    public Task(String title) {
       this.title = title;
    }
+   
+   public Task(String title,String status , String project) {
+		this.title=title;
+		this.status=status;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		this.dateTask=sdf.format(new Date()); 
+		this.project=project;
+		
+	}
 
    // Assign the status of the task  to the variable status.
    public void taskStatus(String taskStatus) {
@@ -16,8 +28,10 @@ public class Task {
    }
 
    /* Assign the date to the variable dateTask.*/
-   public void TaskDate(String taskDate) {
-      dateTask = taskDate ;
+   public void TaskDate() {
+	   SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+	    dateTask = sdf.format(new Date()); 
+      
    }
 
    /* Assign the name of the project which the task belongs to it to the variable project.*/
@@ -27,9 +41,14 @@ public class Task {
 
    /* Print the Task details */
    public void printTasks() {
-      System.out.println("Title:"+ title );
-      System.out.println("Status:" +status );
-      System.out.println("Date of the Task:" + dateTask );
-      System.out.println("Belong to this Project" + project);
+      System.out.println("Title of the task: "+ title );
+      System.out.println("Status of the task: " +status );
+      System.out.println("Date of the Task: " + dateTask );
+      System.out.println("This task belong to this Project: " + project);
       System.out.println("");
-   }}
+   }
+   
+   
+   
+   
+}

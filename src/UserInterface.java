@@ -31,6 +31,7 @@ public class UserInterface {
 		      switch(choice) {
 		         case 1 :
 		        	 System.out.println(">>you choose to Show Task List (by date or project)");
+		        	 
 		        	
 		            break;
 		         case 2 :
@@ -58,6 +59,7 @@ public class UserInterface {
 			
 			
 				scanner.close();
+				
 		      
 	}
 

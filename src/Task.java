@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Task {
+	static List<Task> Tasks = new ArrayList<>();
 
   private String title;
   private String status;
@@ -28,6 +29,9 @@ public class Task {
    }
    public String getProjectTask() {
        return project;
+   }
+   public String getDateTask() {
+	   return this.dateTask;
    }
 
    // Assign the status of the task  to the variable status.
@@ -71,20 +75,36 @@ public class Task {
 			
 			String project = scanner.nextLine();
 			
-			Task taskone = new Task (title,status,project);
-			taskone.printTasks();
+		       Tasks.add(new Task(title,status,project));
+			
+			
+			
 			System.out.println("Task Created");
 	}
    
    public static void printAllTasks() {
 	   
-       List<Task> Tasks = new ArrayList<>();
-       Tasks.add(new Task("Rajeev", "done","project1"));
-       Tasks.add(new Task("John", "done","project1"));
-       Tasks.add(new Task("Steve", "done","project1"));
-
+       
+      
+	   System.out.println("------------------------------------------------------------------");
        Tasks.forEach(task -> {
-           System.out.println(task.getTitleTask());});
+    	   System.out.println("Title of the task: "+task.getTitleTask() );
+    	      System.out.println("Status of the task: " +task.getStatusTask() );
+    	      System.out.println("Date of the Task: " +task.getDateTask() );
+    	      System.out.println("This task belong to this Project: " + task.getProjectTask());
+    	      System.out.println("");
+    	   
+       });
+       System.out.println("------------------------------------------------------------------");
+   }
+   
+   public static void editTasks() {
+	   System.out.println(">> Pick an option:  ");
+		System.out.println(">> (1) Update Task ");
+		System.out.println(">> (2) Remove Task ");
+		System.out.println(">> (3) mark task   ");
+		
+	   
    }
    
    

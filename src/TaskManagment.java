@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class TaskManagment {
+	
+	
+	
+	
 
 	
 		
@@ -31,7 +35,7 @@ public class TaskManagment {
 			          case 2:  
 			            
 			              System.out.println("You choose to remove a task " );
-			            
+			            Task.Removal();
 			            break;
 
 			          
@@ -39,7 +43,7 @@ public class TaskManagment {
 
 			          case 3:
 			        	System.out.println(" You choose to mark a task ");
-			            
+			            Task.MarkAsDone();
 			            break;
 			            
 			          case 4:

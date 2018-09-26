@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Task {
-	static List<Task> Tasks = new ArrayList<>();
+	public static  List<Task> Tasks = new ArrayList<>(); ;
 
   private String title;
   private String status;
@@ -20,6 +20,7 @@ public class Task {
 		this.dateTask=sdf.format(new Date()); 
 		this.project=project;
 		
+		
 	}
    public String getTitleTask() {
        return title;
@@ -27,6 +28,9 @@ public class Task {
    public String getStatusTask() {
        return status;
    }
+   public void setStatusTask(String statusupdate) { 
+	   status = statusupdate; }
+   
    public String getProjectTask() {
        return project;
    }
@@ -82,7 +86,7 @@ public class Task {
 			System.out.println("Task Created");
 	}
    
-   public static void printAllTasks() {
+   public static  void printAllTasks() {
 	   
        
       
@@ -92,13 +96,14 @@ public class Task {
     	      System.out.println("Status of the task: " +task.getStatusTask() );
     	      System.out.println("Date of the Task: " +task.getDateTask() );
     	      System.out.println("This task belong to this Project: " + task.getProjectTask());
+    	      System.out.println("Index of the task :" +Tasks.indexOf(task) );
     	      System.out.println("");
     	   
        });
        System.out.println("------------------------------------------------------------------");
    }
    
-   public static void editTasks() {
+   public  void editTasks() {
 	   System.out.println(">> Pick an option:  ");
 		System.out.println(">> (1) Update Task ");
 		System.out.println(">> (2) Remove Task ");
@@ -107,7 +112,40 @@ public class Task {
 	   
    }
    
+  public static  void Removal() {
+
+	    
+       Scanner in = new Scanner(System.in);
+       System.out.println("Enter the index Element to be deleted : ");
+       
+      
+       int elem = in.nextInt();
+       
+       
+       
+                   Tasks.remove(elem);
+               
+           }
+  public static  void MarkAsDone() {
+
+	    
+      Scanner in = new Scanner(System.in);
+      System.out.println("Enter the index Element to be Masked as done : ");
+      
+     
+      int elem = in.nextInt();
+      
+      
+      
+                  Tasks.get(elem).setStatusTask("done");
+              
+          }
+       
+     
+                    
+   }
    
    
    
-}
+   
+

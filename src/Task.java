@@ -28,15 +28,22 @@ public class Task {
    public String getStatusTask() {
        return status;
    }
-   public void setStatusTask(String statusupdate) { 
-	   status = statusupdate; }
-   
    public String getProjectTask() {
        return project;
    }
    public String getDateTask() {
 	   return this.dateTask;
    }
+   public void setStatusTask(String statusupdate) { 
+	   status = statusupdate; }
+   public void setTitleTask(String titleupdate) { 
+	   title = titleupdate; }
+   public void setProjectTask(String projectupdate) { 
+	   project = projectupdate; }
+   public void setDateTask(String dateupdate) { 
+	   dateTask = dateupdate; }
+   
+   
 
    // Assign the status of the task  to the variable status.
    public void taskStatus(String taskStatus) {
@@ -140,6 +147,7 @@ public class Task {
                   Tasks.get(elem).setStatusTask("done");
               
           }
+
        
      
                     

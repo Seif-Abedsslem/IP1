@@ -1,5 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -147,7 +149,10 @@ public class Task {
                   Tasks.get(elem).setStatusTask("done");
               
           }
-
+  public static void testprinting() {
+		Collections.sort(Tasks, Comparator.comparing(Task ::getProjectTask));
+      System.out.println("Sorted tasks List by project : " +Tasks);
+	}
        
      
                     

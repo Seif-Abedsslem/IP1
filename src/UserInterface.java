@@ -34,6 +34,7 @@ public class UserInterface {
 	            System.out.print("You choose to show all the tasks\n ");
 	            
 	            Task.printAllTasks();
+	            Task.testprinting();
 	            break;
 
 	          case 2:  

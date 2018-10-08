@@ -1,8 +1,10 @@
 
+
 public class Menu {
 
-	public static void main(String[] args) 
-	{
-		TaskManagment.MenuDisplay();
+	private static TaskManagment taskManagment = new TaskManagment();
+
+	public static void main(String[] args) {
+		taskManagment.MenuDisplay();
 	}
 }

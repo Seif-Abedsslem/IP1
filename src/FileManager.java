@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FileManager {
 
-	private static final String FILE_PATH = "/Users/tmp-sda-1172/Desktop/test/test.txt";
+	private static final String FILE_PATH = "/Users/tmp-sda-1172/Desktop/IP1/src/test.txt";
 
 	public void saveTasksToFile(List<Task> tasks) {
 		try {

@@ -1,3 +1,4 @@
+package taskManager;
 import java.util.Date;
 import java.io.IOException;
 import java.text.ParseException;
@@ -5,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import fileManager.FileManager;
 
 public class TaskManagment {
 	private FileManager fileManager = new FileManager();

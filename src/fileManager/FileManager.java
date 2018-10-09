@@ -1,3 +1,4 @@
+package fileManager;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -6,6 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import taskManager.Task;
+import taskManager.TaskManagment;
+
+
 
 public class FileManager {
 
@@ -59,7 +64,7 @@ public class FileManager {
 		try {
 			result = readTaskFromFile();
 		} catch (ClassNotFoundException | IOException e1) {
-			// TODO Auto-generated catch block
+
 			e1.printStackTrace();
 		} finally {
 			System.out.println("Tasks loaded from file.");

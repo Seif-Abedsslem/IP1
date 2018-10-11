@@ -42,4 +42,5 @@ Tasks loaded from file.
 
 # Class diagrams
 
-![Class Diagram](/IP1 class diagram.png)
+![GitHub Logo](https://github.com/Seif-Abedsslem/IP1/blob/develop/IP1ClassDiagram.png?raw=true)
+

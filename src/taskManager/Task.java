@@ -16,10 +16,10 @@ public class Task implements Serializable {
 
 	// This is the constructor of the class Task
 	/**
-	 * @param title
-	 * @param status
-	 * @param dateTask
-	 * @param project
+	 * @param title Task title
+	 * @param status Task status
+	 * @param dateTask Task date 
+	 * @param project Task project
 	 */
 	public Task(String title, String status, Date dateTask, String project) {
 		this.title = title;
@@ -30,28 +30,28 @@ public class Task implements Serializable {
 	}
 
 	/**
-	 * @return
+	 * @return title of task
 	 */
 	public String getTitleTask() {
 		return title;
 	}
 
 	/**
-	 * @return
+	 * @return status of task
 	 */
 	public String getStatusTask() {
 		return status;
 	}
 
 	/**
-	 * @return
+	 * @return project of task
 	 */
 	public String getProjectTask() {
 		return project;
 	}
 
 	/**
-	 * @return
+	 * @return date of task
 	 */
 	public Date getDateTask() {
 		return dateTask;
@@ -88,6 +88,7 @@ public class Task implements Serializable {
 	/* Print the Task details */
 	
 	
+	@Override
 	public String toString() {
 		String s = "\n Title: " + title + " Status: " + status + " Date: " + dateTask + " Project: " + project + "\n";
 		return s;

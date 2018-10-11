@@ -47,7 +47,7 @@ class FileManagerTest {
 
 		for (int i = 0; i < 10; i++) {
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = sf.parse(String.format("2020-09-%s", i));
+			Date date = sf.parse(String.format("2018-11-%s", i));
 			tasks.add(new Task("my title" + i, "to do", date, "Mega project"));
 		}
 

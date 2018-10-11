@@ -33,7 +33,7 @@ public class TaskManagment {
 	 * @param tasks
 	 * @return
 	 */
-	public static int doneTask(List<Task> tasks) {
+	private static int doneTask(List<Task> tasks) {
 		int done = 0;
 		for (Task t : tasks) {
 			if (t.getStatusTask().equals("done"))
@@ -49,72 +49,12 @@ public class TaskManagment {
 		Scanner keybd = new java.util.Scanner(System.in);
 		int choice = 1;
 		while (choice != 4) {
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format(
-					"|                                        Welcome ToDo List                                            |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format("|                          You have " + (tasks.size() - doneTask(tasks))
-					+ " tasks todo and " + doneTask(tasks) + " tasks are done!                               |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format(
-					"|     Pick an option:                                                                                 |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format(
-					"|               (1) Show Task List (by date or project)                                               |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format(
-					"|               (2) Add New Task                                                                      |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format(
-					"|               (3) Edit Task (update, mark as done, remove)                                          |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format(
-					"|               (4) Save and Quit                                                                     |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
-			System.out.format(
-					"|                                              Please Enter your Choice    |                          |%n");
-			System.out.format(
-					"+-----------------------------------------------------------------------------------------------------+%n");
+			printMainMenu();
 			// process user's menu choice
 			try {
 				choice = keybd.nextInt();
 				keybd.nextLine(); // clear input stream
-				switch (choice) {
-				case 1:
-					System.out.print("You choose to show all the tasks\n ");
-
-					PrintTasks();
-					break;
-
-				case 2:
-					System.out.println("You choose to add a new task ");
-					addTask();
-					break;
-
-				case 3:
-					System.out.print(" You choose to Edit Task (update, mark as done, remove) ");
-					editTasks();
-					break;
-
-				case 4:
-					fileManager.saveTasksToFile(tasks);
-					System.out.println(" You choose to Save and Quit ");
-					System.out.println("Goodbye!");
-					break;
-
-				default:
-					System.out.println(
-							"Sorry, but " + choice + " is not one of " + "the menu choices. Please try again.");
-					break;
-				}
+				handleMainMenuInput(choice);
 			} catch (java.util.InputMismatchException ime) {
 				System.out.println("Sorry, but you must enter a number.");
 				keybd.nextLine(); // clear bad input from stream
@@ -125,10 +65,78 @@ public class TaskManagment {
 		} // end while
 	}// end main
 
+	public void printMainMenu() {
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|                                        Welcome ToDo List                                            |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format("|                          You have " + (tasks.size() - doneTask(tasks))
+				+ " tasks todo and " + doneTask(tasks) + " tasks are done!                               |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|     Pick an option:                                                                                 |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|               (1) Show Task List (by date or project)                                               |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|               (2) Add New Task                                                                      |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|               (3) Edit Task (update, mark as done, remove)                                          |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|               (4) Save and Quit                                                                     |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|                                              Please Enter your Choice    |                          |%n");
+		System.out.format(
+				"+-----------------------------------------------------------------------------------------------------+%n");
+	}
+
+	private void handleMainMenuInput(int choice) throws ParseException {
+		switch (choice) {
+		case 1:
+			System.out.print("You choose to show all the tasks\n ");
+
+			PrintTasks();
+			break;
+
+		case 2:
+			System.out.println("You choose to add a new task ");
+			addTask();
+			break;
+
+		case 3:
+			System.out.print(" You choose to Edit Task (update, mark as done, remove) ");
+			editTasks();
+			break;
+
+		case 4:
+			fileManager.saveTasksToFile(tasks);
+			System.out.println(" You choose to Save and Quit ");
+			System.out.println("Goodbye!");
+			break;
+
+		default:
+			System.out.println(
+					"Sorry, but " + choice + " is not one of " + "the menu choices. Please try again.");
+			break;
+		}
+	}
+
 	/**
 	 * @throws ParseException
 	 */
-	public void addTask() throws ParseException {
+	private void addTask() throws ParseException {
 		Scanner scanner = new java.util.Scanner(System.in);
 		System.out.println("adding a new task");
 		System.out.println("Please Enter the Title of the Task:");
@@ -137,12 +145,7 @@ public class TaskManagment {
 		String status = scanner.nextLine();
 		System.out.println("Please Enter the Date of the Task:");
 
-		String date1;
-		do {
-			Scanner scanner1 = new java.util.Scanner(System.in);
-			System.out.println("Please Enter the Date with this format (yyyy-MM-dd) ");
-			date1 = scanner1.nextLine();
-		} while ((isValidDate(date1)) == false);
+		String date1 = getDateFromUser();
 		Date datetask = new SimpleDateFormat("yyyy-MM-dd").parse(date1);
 		System.out.println("Please Enter the Project of the Task:");
 		String project = scanner.nextLine();
@@ -152,11 +155,21 @@ public class TaskManagment {
 		System.out.println("Task Created");
 	}
 
+	private String getDateFromUser() {
+		String date1;
+		do {
+			Scanner scanner1 = new java.util.Scanner(System.in);
+			System.out.println("Please Enter the Date with this format (yyyy-MM-dd) ");
+			date1 = scanner1.nextLine();
+		} while ((isValidDate(date1)) == false);
+		return date1;
+	}
+
 	/**
 	 * @param inDate
 	 * @return
 	 */
-	public static boolean isValidDate(String inDate) {
+	private static boolean isValidDate(String inDate) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		try {
@@ -170,7 +183,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void PrintTasks() {
+	private void PrintTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
 
 		int choice = 1;
@@ -221,7 +234,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void printAllTasks() {
+	private void printAllTasks() {
 
 		String AlignFormat = "| %-11d | %-16s |%-18s |%-29s |%-16s |%n";
 		System.out.format(
@@ -242,7 +255,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void printAllTasksSortedByDate() {
+	private void printAllTasksSortedByDate() {
 		String AlignFormat = "| %-11d | %-16s |%-18s |%-25s |%-16s |%n";
 		System.out.format(
 				"+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
@@ -271,7 +284,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void editTasks() {
+	private void editTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
 
 		int choice = 1;
@@ -322,7 +335,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void PrintAllTasksSortByProject() {
+	private void PrintAllTasksSortByProject() {
 		Scanner project = new Scanner(System.in);
 		System.out.println("Enter the project : ");
 		String elem = project.nextLine();
@@ -359,7 +372,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void Removal() {
+	private void Removal() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter the index Element to be deleted : ");
 		int elem = in.nextInt();
@@ -369,7 +382,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void MarkAsDone() {
+	private void MarkAsDone() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter the index Element to be Masked as done : ");
 		int elem = in.nextInt();
@@ -379,7 +392,7 @@ public class TaskManagment {
 	/**
 	 * 
 	 */
-	public void UpdateTasks() {
+	private void UpdateTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
 		int choice = 1;
 		while (choice != 4) {

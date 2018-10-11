@@ -92,17 +92,14 @@ public class TaskManagment {
 		System.out.println("Please Enter the Status of the Task:");
 		String status = scanner.nextLine();
 		System.out.println("Please Enter the Date of the Task:");
-		String dateTask = scanner.nextLine();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		format.setLenient(false);
 		
-		try {
-            format.parse(dateTask);
-        } catch (ParseException e) {
-            System.out.println("Date " + dateTask + " is not valid according to " +
-                ((SimpleDateFormat) format).toPattern() + " pattern.");
-        }
-		Date datetask = format.parse(dateTask);
+		String date1;
+		do{
+    		Scanner scanner1 = new java.util.Scanner(System.in);
+        	System.out.println("Please Enter the Date with this format (yyyy-MM-dd) ");
+        	date1 = scanner1.nextLine();
+    	}while((isValidDate(date1))==false);
+		Date datetask =new SimpleDateFormat("yyyy-MM-dd").parse(date1);
 		System.out.println("Please Enter the Project of the Task:");
 		String project = scanner.nextLine();
 
@@ -111,6 +108,17 @@ public class TaskManagment {
 		// FileManager.saveTasksToFile(Tasks);
 		System.out.println("Task Created");
 	}
+	
+	public static boolean isValidDate(String inDate) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    dateFormat.setLenient(false);
+	    try {
+	      dateFormat.parse(inDate.trim());
+	    } catch (ParseException pe) {
+	      return false;
+	    }
+	    return true;
+	  }
 	
 	public void PrintTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);

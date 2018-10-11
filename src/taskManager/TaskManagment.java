@@ -1,11 +1,15 @@
 package taskManager;
 import java.util.Date;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import fileManager.FileManager;
 
@@ -45,7 +49,8 @@ public class TaskManagment {
 				switch (choice) {
 				case 1:
 					System.out.print("You choose to show all the tasks\n ");
-					printAllTasks();
+					
+					PrintTasks();
 					break;
 
 				case 2:
@@ -88,18 +93,75 @@ public class TaskManagment {
 		String status = scanner.nextLine();
 		System.out.println("Please Enter the Date of the Task:");
 		String dateTask = scanner.nextLine();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		format.setLenient(false);
+		
+		try {
+            format.parse(dateTask);
+        } catch (ParseException e) {
+            System.out.println("Date " + dateTask + " is not valid according to " +
+                ((SimpleDateFormat) format).toPattern() + " pattern.");
+        }
+		Date datetask = format.parse(dateTask);
 		System.out.println("Please Enter the Project of the Task:");
 		String project = scanner.nextLine();
 
-		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM-dd");
-		Date datetask = td.parse(dateTask);
+		
 		tasks.add(new Task(title, status, datetask, project));
 		// FileManager.saveTasksToFile(Tasks);
 		System.out.println("Task Created");
 	}
+	
+	public void PrintTasks() {
+		java.util.Scanner keybd = new java.util.Scanner(System.in);
+
+		int choice = 1;
+		while (choice != 4) {
+
+			System.out.println(">> Pick an option:  ");
+			System.out.println(">> (1) Print all tasks ");
+			System.out.println(">> (2) Print all tasks sorted by date ");
+			System.out.println(">> (3) Print all tasks sorted by Project ");
+			System.out.println(">> (4) Exit   ");
+
+			try {
+				choice = keybd.nextInt();
+				keybd.nextLine(); // clear input stream
+				switch (choice) {
+				case 1:
+					System.out.print("You choose to print all tasks\n");
+					printAllTasks();
+					break;
+
+				case 2:
+					System.out.println("You choose to print all tasks sorted by date ");
+					printAllTasksSortedByDate();
+					break;
+
+				case 3:
+					System.out.println(" You choose to print all tasks sorted by project ");
+					PrintAllTasksSortByProject();
+					break;
+
+				case 4:
+					System.out.println(" You choose to exit ");
+					break;
+
+				default:
+					System.out.println(
+							"Sorry, but " + choice + " is not one of " + "the menu choices. Please try again.");
+					break;
+				}
+			} catch (java.util.InputMismatchException ime) {
+				System.out.println("Sorry, but you must enter a number.");
+				keybd.nextLine(); // clear bad input from stream
+
+			}
+		}
+	}
 
 	public void printAllTasks() {
-		System.out.println("------------------------------------------------------------------");
+//		System.out.println("------------------------------------------------------------------");
 //	       try {
 //			ArrayList<Task> tempTaskList = FileManager.readTaskFromFile();
 //			tempTaskList.forEach(task -> {
@@ -120,15 +182,15 @@ public class TaskManagment {
 //		}
 //	       System.out.println("------------------------------------------------------------------");
 //	   }
-		tasks.forEach(task -> {
-			System.out.println("Title of the task: " + task.getTitleTask());
-			System.out.println("Status of the task: " + task.getStatusTask());
-			System.out.println("Date of the Task: " + task.getDateTask());
-			System.out.println("This task belong to this Project: " + task.getProjectTask());
-			System.out.println("Index of the task :" + tasks.indexOf(task));
-			System.out.println("");
-
-		});
+//		tasks.forEach(task -> {
+//			System.out.println("Title of the task: " + task.getTitleTask());
+//			System.out.println("Status of the task: " + task.getStatusTask());
+//			System.out.println("Date of the Task: " + task.getDateTask());
+//			System.out.println("This task belong to this Project: " + task.getProjectTask());
+//			System.out.println("Index of the task :" + tasks.indexOf(task));
+//			System.out.println("");
+//
+//		});
 		String AlignFormat = "| %-11d | %-16s |%-18s |%-29s |%-16s |%n";
         System.out.format("+-------------+------------------+-------------------+------------------------------+-----------------+%n");
     	System.out.format("| Task Index  |     Tiltle       |        Status     |                Date          |      Project    |%n");
@@ -139,6 +201,41 @@ public class TaskManagment {
         System.out.format("+-------------+------------------+-------------------+------------------------------+-----------------+%n");
     
 	}
+	
+	
+	public void printAllTasksSortedByDate() {
+		String AlignFormat = "| %-11d | %-16s |%-18s |%-25s |%-16s |%n";
+        System.out.format("+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
+    	System.out.format("| Task Index  |     Tiltle       |        Status     |       Date                  |      Project    |%n");
+    	System.out.format("+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
+        
+        
+        
+        
+        
+ 
+       
+        Collections.sort(tasks, new Comparator<Task>() {
+            public int compare(Task p1, Task p2) {
+                return Long.valueOf(p1.getDateTask().getTime()).compareTo(p2.getDateTask().getTime());
+            }
+        });
+ 
+        
+        for(Task task: tasks){
+        	System.out.format(AlignFormat,tasks.indexOf(task), task.getTitleTask(), task.getStatusTask(), task.getDateTask(), task.getProjectTask());
+        };
+ 
+        System.out.format("+-------------+------------------+-------------------+----------------------------+------------------+%n");
+ 
+       
+    }
+
+
+
+
+    
+	
 
 	public void editTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
@@ -187,6 +284,28 @@ public class TaskManagment {
 			}
 		}
 	}
+	public void PrintAllTasksSortByProject() {
+		Scanner project = new Scanner(System.in);
+		System.out.println("Enter the project : ");
+		String elem = project.nextLine();
+		
+        
+        ArrayList<Task> filteredtasks = filterByProject(tasks, elem);
+        String AlignFormat1 = "| %-11d | %-16s |%-18s |%-25s |%-16s |%n";
+        System.out.format("+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
+    	System.out.format("| Task Index  |     Project      |        Status     |       Date                  |      Title      |%n");
+    	System.out.format("+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
+    	for(Task task: filteredtasks){
+        	System.out.format(AlignFormat1,tasks.indexOf(task),task.getProjectTask(), task.getStatusTask(), task.getDateTask(),task.getTitleTask());
+        };
+ 
+        System.out.format("+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
+	}
+	private static ArrayList<Task> filterByProject(List<Task> tasks2, String projectName) {
+        ArrayList<Task> filterdTask = (ArrayList<Task>) tasks2.stream()
+                .filter(x -> x.getProjectTask().equals(projectName)).collect(Collectors.toList());
+        return filterdTask;
+    }
 
 	public void Removal() {
 		Scanner in = new Scanner(System.in);

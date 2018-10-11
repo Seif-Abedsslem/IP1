@@ -14,14 +14,25 @@ import java.util.stream.Collectors;
 
 import fileManager.FileManager;
 
+/**
+ * @author tmp-sda-1172
+ *
+ */
 public class TaskManagment {
 	private FileManager fileManager = new FileManager();
 	public List<Task> tasks = new ArrayList<>();
 
+	/**
+	 * 
+	 */
 	public TaskManagment() {
 		tasks = fileManager.loadTasksFromFile();
 	}
 
+	/**
+	 * @param tasks
+	 * @return
+	 */
 	public static int doneTask(List<Task> tasks) {
 		int done = 0;
 		for (Task t : tasks) {
@@ -31,6 +42,9 @@ public class TaskManagment {
 		return done;
 	}
 
+	/**
+	 * 
+	 */
 	public void MenuDisplay() {
 		Scanner keybd = new java.util.Scanner(System.in);
 		int choice = 1;
@@ -111,6 +125,9 @@ public class TaskManagment {
 		} // end while
 	}// end main
 
+	/**
+	 * @throws ParseException
+	 */
 	public void addTask() throws ParseException {
 		Scanner scanner = new java.util.Scanner(System.in);
 		System.out.println("adding a new task");
@@ -135,6 +152,10 @@ public class TaskManagment {
 		System.out.println("Task Created");
 	}
 
+	/**
+	 * @param inDate
+	 * @return
+	 */
 	public static boolean isValidDate(String inDate) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
@@ -146,6 +167,9 @@ public class TaskManagment {
 		return true;
 	}
 
+	/**
+	 * 
+	 */
 	public void PrintTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
 
@@ -194,37 +218,11 @@ public class TaskManagment {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void printAllTasks() {
-//		System.out.println("------------------------------------------------------------------");
-//	       try {
-//			ArrayList<Task> tempTaskList = FileManager.readTaskFromFile();
-//			tempTaskList.forEach(task -> {
-//				      System.out.println("Title of the task: "+task.getTitleTask() );
-//				      System.out.println("Status of the task: " +task.getStatusTask() );
-//				      System.out.println("Date of the Task: " +task.getDateTask() );
-//				      System.out.println("This task belong to this Project: " + task.getProjectTask());
-//				      System.out.println("Index of the task :" +tempTaskList.indexOf(task) );
-//				      System.out.println("");
-//				   
-//			   });
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	       System.out.println("------------------------------------------------------------------");
-//	   }
-//		tasks.forEach(task -> {
-//			System.out.println("Title of the task: " + task.getTitleTask());
-//			System.out.println("Status of the task: " + task.getStatusTask());
-//			System.out.println("Date of the Task: " + task.getDateTask());
-//			System.out.println("This task belong to this Project: " + task.getProjectTask());
-//			System.out.println("Index of the task :" + tasks.indexOf(task));
-//			System.out.println("");
-//
-//		});
+
 		String AlignFormat = "| %-11d | %-16s |%-18s |%-29s |%-16s |%n";
 		System.out.format(
 				"+-------------+------------------+-------------------+------------------------------+-----------------+%n");
@@ -241,6 +239,9 @@ public class TaskManagment {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void printAllTasksSortedByDate() {
 		String AlignFormat = "| %-11d | %-16s |%-18s |%-25s |%-16s |%n";
 		System.out.format(
@@ -267,6 +268,9 @@ public class TaskManagment {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void editTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
 
@@ -315,6 +319,9 @@ public class TaskManagment {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void PrintAllTasksSortByProject() {
 		Scanner project = new Scanner(System.in);
 		System.out.println("Enter the project : ");
@@ -338,12 +345,20 @@ public class TaskManagment {
 				"+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
 	}
 
+	/**
+	 * @param tasks2
+	 * @param projectName
+	 * @return
+	 */
 	private static ArrayList<Task> filterByProject(List<Task> tasks2, String projectName) {
 		ArrayList<Task> filterdTask = (ArrayList<Task>) tasks2.stream()
 				.filter(x -> x.getProjectTask().equals(projectName)).collect(Collectors.toList());
 		return filterdTask;
 	}
 
+	/**
+	 * 
+	 */
 	public void Removal() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter the index Element to be deleted : ");
@@ -351,6 +366,9 @@ public class TaskManagment {
 		tasks.remove(elem);
 	}
 
+	/**
+	 * 
+	 */
 	public void MarkAsDone() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter the index Element to be Masked as done : ");
@@ -358,6 +376,9 @@ public class TaskManagment {
 		tasks.get(elem).setStatusTask("done");
 	}
 
+	/**
+	 * 
+	 */
 	public void UpdateTasks() {
 		java.util.Scanner keybd = new java.util.Scanner(System.in);
 		int choice = 1;

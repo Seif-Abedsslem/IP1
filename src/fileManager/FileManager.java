@@ -9,12 +9,18 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import taskManager.Task;
-import taskManager.TaskManagment;
 
+/**
+ * @author tmp-sda-1172
+ *
+ */
 public class FileManager {
 
 	private static final String FILE_PATH = "/Users/tmp-sda-1172/Desktop/IP1/src/test.txt";
 
+	/**
+	 * @param tasks
+	 */
 	public void saveTasksToFile(List<Task> tasks) {
 		try {
 			// List<Task> tasksList = tasks.subList(0, tasks.size()-1);
@@ -24,6 +30,11 @@ public class FileManager {
 		}
 	}
 
+	/**
+	 * @param collection
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void saveCollectionToFile(List<Task> collection) throws FileNotFoundException, IOException {
 		FileOutputStream fos = new FileOutputStream(FILE_PATH);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -32,6 +43,9 @@ public class FileManager {
 		fos.close();
 	}
 
+	/**
+	 * @param task
+	 */
 	public void saveTaskToFile(Task task) {
 		try {
 			FileOutputStream fos = new FileOutputStream(FILE_PATH);
@@ -44,6 +58,11 @@ public class FileManager {
 		}
 	}
 
+	/**
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public ArrayList<Task> readTaskFromFile() throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = getObjectInputStream();
 		ArrayList<Task> readObject = (ArrayList<Task>) ois.readObject();
@@ -52,12 +71,20 @@ public class FileManager {
 		return result;
 	}
 
+	/**
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public ObjectInputStream getObjectInputStream() throws FileNotFoundException, IOException {
 		FileInputStream fis = new FileInputStream(FILE_PATH);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		return ois;
 	}
 
+	/**
+	 * @return An ArrayList of {@link Task}
+	 */
 	public ArrayList<Task> loadTasksFromFile() {
 		ArrayList<Task> result = new ArrayList<>();
 		try {

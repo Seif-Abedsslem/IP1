@@ -5,7 +5,7 @@ ToDo list is a simple application to save your daily tasks for the user to keep 
 Features
 
 todo list is an application​ that allow a user to:
-		+ Create new tasks. 
+		+ Create new tasks.
 		+ Assign Tasks a title and due date.
 		+ Choose a project for that task to belong to.
 		+ Edit, mark as done or remove tasks.
@@ -39,3 +39,7 @@ Tasks loaded from file.
 +-----------------------------------------------------------------------------------------------------+
 
 ```
+
+# Class diagrams
+
+![Class Diagram](/IP1 class diagram.png)

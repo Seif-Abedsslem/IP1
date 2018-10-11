@@ -1,4 +1,5 @@
 package fileManager;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
@@ -41,24 +42,23 @@ class FileManagerTest {
 
 	@Test
 	void testReadTaskFromFile() throws ClassNotFoundException, IOException, ParseException {
-		
+
 		List<Task> tasks = new ArrayList<>();
-		
-		for(int i=0; i<10; i++) {
+
+		for (int i = 0; i < 10; i++) {
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = sf.parse(String.format("2020-09-%s", i));
-			tasks.add(new Task("my title"+i,"to do",date,"Mega project"));
+			tasks.add(new Task("my title" + i, "to do", date, "Mega project"));
 		}
-		
+
 		FileManager fileManager = new FileManager();
-		fileManager .saveTasksToFile(tasks);
-		
-		
+		fileManager.saveTasksToFile(tasks);
+
 		// Act
 		ArrayList<Task> readTasks = fileManager.readTaskFromFile();
-		
+
 		// Assert
-		readTasks.forEach(readTask->{
+		readTasks.forEach(readTask -> {
 			assertEquals(readTask.getTitleTask(), tasks.get(readTasks.indexOf(readTask)).getTitleTask());
 		});
 	}

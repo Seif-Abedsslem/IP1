@@ -42,4 +42,4 @@ Tasks loaded from file.
 
 # Class diagrams
 
-![Class Diagram](/IP1 class diagram.png)
+![Class Diagram](github.com/Seif-Abedsslem/IP1/IP1 class diagram.png)

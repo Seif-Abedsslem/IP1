@@ -14,24 +14,27 @@ import java.util.stream.Collectors;
 
 import fileManager.FileManager;
 
-/**
- * @author tmp-sda-1172
+/** This is the Class TaskManagment that is responsable of the managment of the task
+ * @author Seifeddine Abedsslem
  *
  */
 public class TaskManagment {
+	// Create a new obejct of the class FileManager
 	private FileManager fileManager = new FileManager();
+	// Declare a new ArrayList called tasks
 	public List<Task> tasks = new ArrayList<>();
-
+    // import tasks from the file and save them in the Arraylist tasks
 	/**
 	 * 
 	 */
 	public TaskManagment() {
 		tasks = fileManager.loadTasksFromFile();
 	}
-
+    // this static method called doneTask which get an Arraylist as param and return a integer of number of tasks who have the status done
 	/**
+	 * 
 	 * @param tasks
-	 * @return
+	 * @return done type integer
 	 */
 	private static int doneTask(List<Task> tasks) {
 		int done = 0;
@@ -41,7 +44,8 @@ public class TaskManagment {
 		}
 		return done;
 	}
-
+    // this public method called MenuDisplay allow the interaction with the user
+	// and show the different options that the user can use with handling the exceptions
 	/**
 	 * 
 	 */
@@ -64,7 +68,10 @@ public class TaskManagment {
 			}
 		} // end while
 	}// end main
-
+    // this method allow to print the main interface
+	/**
+	 * 
+	 */
 	public void printMainMenu() {
 		System.out.format(
 				"+-----------------------------------------------------------------------------------------------------+%n");
@@ -101,7 +108,12 @@ public class TaskManagment {
 		System.out.format(
 				"+-----------------------------------------------------------------------------------------------------+%n");
 	}
-
+	
+   // this method called handleMainMenuInput allow to get input choices from user and handle the exceptions of wrong inputs
+	/**
+	 * @param choice type int
+	 * @throws ParseException
+	 */
 	private void handleMainMenuInput(int choice) throws ParseException {
 		switch (choice) {
 		case 1:
@@ -132,7 +144,7 @@ public class TaskManagment {
 			break;
 		}
 	}
-
+    // this private method called addTask allow the user to add a task
 	/**
 	 * @throws ParseException
 	 */
@@ -154,7 +166,11 @@ public class TaskManagment {
 		// FileManager.saveTasksToFile(Tasks);
 		System.out.println("Task Created");
 	}
-
+     //this method called getDateFromUser allow the user to enter the right format of date
+	 //and return a date type String to be converted later in adding task to type date
+	/**
+	 * @return date1 type String
+	 */
 	private String getDateFromUser() {
 		String date1;
 		do {
@@ -164,9 +180,9 @@ public class TaskManagment {
 		} while ((isValidDate(date1)) == false);
 		return date1;
 	}
-
+    //this method test if the user input is a date or not and return true or false
 	/**
-	 * @param inDate
+	 * @param inDate tyoe boolean
 	 * @return
 	 */
 	private static boolean isValidDate(String inDate) {
@@ -179,7 +195,7 @@ public class TaskManagment {
 		}
 		return true;
 	}
-
+   // this method allow to show the menu when the user choose to show tasks
 	/**
 	 * 
 	 */
@@ -230,7 +246,7 @@ public class TaskManagment {
 			}
 		}
 	}
-
+ // this method allow the user to show all tasks stored in the file
 	/**
 	 * 
 	 */
@@ -251,7 +267,7 @@ public class TaskManagment {
 				"+-------------+------------------+-------------------+------------------------------+-----------------+%n");
 
 	}
-
+// this method allow the user to show all tasks stored in the file sorted by date
 	/**
 	 * 
 	 */
@@ -280,7 +296,7 @@ public class TaskManagment {
 				"+-------------+------------------+-------------------+-------------------------------+-----------------+%n");
 
 	}
-
+    // this method allow the user to see the menu when he choose to edit a task
 	/**
 	 * 
 	 */
@@ -331,7 +347,7 @@ public class TaskManagment {
 			}
 		}
 	}
-
+	// this method allow the user to show all tasks stored in the file sorted by project
 	/**
 	 * 
 	 */
@@ -357,18 +373,19 @@ public class TaskManagment {
 		System.out.format(
 				"+-------------+------------------+-------------------+-----------------------------+-----------------+%n");
 	}
-
+    // this method get a project name of the user and show an Arraylist all tasks that belong to that project
 	/**
 	 * @param tasks2
 	 * @param projectName
-	 * @return
+	 * @return Arraylist of tasks
 	 */
+	
 	private static ArrayList<Task> filterByProject(List<Task> tasks2, String projectName) {
 		ArrayList<Task> filterdTask = (ArrayList<Task>) tasks2.stream()
 				.filter(x -> x.getProjectTask().equals(projectName)).collect(Collectors.toList());
 		return filterdTask;
 	}
-
+    // this method allow the user to delete a task after giving its index number
 	/**
 	 * 
 	 */
@@ -378,7 +395,7 @@ public class TaskManagment {
 		int elem = in.nextInt();
 		tasks.remove(elem);
 	}
-
+	// this method allow the user to mark a task as done is his field status after giving its index number
 	/**
 	 * 
 	 */
@@ -388,7 +405,7 @@ public class TaskManagment {
 		int elem = in.nextInt();
 		tasks.get(elem).setStatusTask("done");
 	}
-
+    // this method show the menu of editing a task for the user
 	/**
 	 * 
 	 */

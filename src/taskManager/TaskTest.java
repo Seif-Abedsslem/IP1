@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author tmp-sda-1172
+ * @author Seifeddine Abedsslem
  *
  */
 class TaskTest {

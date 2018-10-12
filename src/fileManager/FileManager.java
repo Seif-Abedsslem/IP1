@@ -10,16 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import taskManager.Task;
 
-/**
- * @author tmp-sda-1172
+/** this Class called FileManager is responsible of traking tasks from file and saving them 
+ * @author Seifeddine Abedsslem
  *
  */
 public class FileManager {
-
+    // this is a private static varibale type String that contain the path of the file in the computer
 	private static final String FILE_PATH = "/Users/tmp-sda-1172/Desktop/IP1/src/test.txt";
-
+    
+	// this method take an arrayList as param and save it into the file
 	/**
-	 * @param tasks
+	 * @param tasks ArrayList
 	 */
 	public void saveTasksToFile(List<Task> tasks) {
 		try {
@@ -29,7 +30,8 @@ public class FileManager {
 			ioe.printStackTrace();
 		}
 	}
-
+	
+	// this method take an arrayList as param and save it into the file
 	/**
 	 * @param collection
 	 * @throws FileNotFoundException
@@ -57,7 +59,7 @@ public class FileManager {
 			ioe.printStackTrace();
 		}
 	}
-
+    // this method read tasks from a file and store them into an arraylist
 	/**
 	 * @return
 	 * @throws IOException
@@ -81,7 +83,7 @@ public class FileManager {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		return ois;
 	}
-
+    // this method store the tasks readed from file to an arraylist called result
 	/**
 	 * @return An ArrayList of {@link Task}
 	 */
